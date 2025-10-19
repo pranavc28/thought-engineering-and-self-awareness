@@ -1,0 +1,28 @@
+{
+  "THRESHOLDS": {
+    "gpt-4o": {
+      "classification": 0.75,
+      "posthoc_refinement": 0.7
+    },
+    "gpt-5": {
+      "classification": 0.5,
+      "posthoc_refinement": 0.95
+    },
+    "gpt-5-mini": {
+      "classification": 0.75,
+      "posthoc_refinement": 0.7
+    },
+    "o3": {
+      "classification": 0.5,
+      "posthoc_refinement": 0.85
+    },
+    "o4-mini": {
+      "classification": 0.5,
+      "posthoc_refinement": 0.85
+    }
+  },
+  "DEFAULT_THRESHOLDS": {
+    "classification": 0.55,
+    "posthoc_refinement": 0.75
+  }
+}
