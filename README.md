@@ -80,21 +80,6 @@ Output: `comprehensive_statistical_significance.md`, `comprehensive_statistical_
 
 **Key insight**: p < 0.05 indicates statistically significant differences between strategies
 
-## Configuration
-
-```python
-SAMPLES = 200           # Number of test claims
-MODELS = ["o3", "gpt-5"]
-MAX_WORKERS = 20       # Parallel processes
-```
-
-## How It Works
-
-1. Experiments generate results with confidence scores
-2. Optimizer grid searches all thresholds, selects best by F1
-3. Apply optimized thresholds
-4. Re-run → improved performance
-
 **Expected improvement**: +0.01 to +0.03 F1
 
 ## Files
