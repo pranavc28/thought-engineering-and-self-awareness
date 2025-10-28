@@ -52,28 +52,39 @@ python thought_vs_naive_scifact.py
 
 Check if F1 scores improved.
 
-### 5. Analyze NOINFO Performance
+### 5. Create Rescaled Visualizations
 ```bash
-python analyze_noinfo_performance.py
+python create_rescaled_charts_with_stats.py
 ```
 
-Deep-dive analysis of per-class classification performance:
-- **Graph 1**: NOINFO F1 scores by model and strategy (line plot comparing all three)
-- **Graph 2**: SUPPORT F1 scores by model and strategy (line plot comparing all three)
-- **Graph 3**: CONTRADICT F1 scores by model and strategy (line plot comparing all three)
+Generates rescaled bar charts that emphasize performance differences between strategies:
+- Creates separate NOINFO F1 charts for each model (o3, gpt-5)
+- Rescales y-axis to highlight small but meaningful differences
+- Displays exact F1 scores above each bar
 
-Output: `noinfo_f1_comparison.png`, `support_f1_comparison.png`, `contradict_f1_comparison.png`, `noinfo_analysis_results.json`
+Output: `noinfo_f1_o3.png`, `noinfo_f1_gpt-5.png`
 
-This helps diagnose why certain strategies struggle with NOINFO predictions by examining:
-- F1, precision, and recall for NOINFO class
-- Confidence score distributions for correct vs incorrect predictions
-- Per-model differences in confidence calibration
+**Why rescaling?** Small F1 improvements (0.02-0.05) can be statistically significant but hard to see on a [0,1] scale. Rescaled charts make these differences visible.
+
+### 6. Run Statistical Significance Tests
+```bash
+python focused_statsig_comparisons_v2.py
+```
+
+Performs comprehensive statistical testing using permutation tests (10,000 permutations):
+- **Within-model comparisons**: Tests if strategy differences are statistically significant
+- Compares: Overthinking vs Automated Refinement, Automated Refinement vs Naive, Overthinking vs Naive
+- Reports p-values, confidence intervals, and significance markers
+
+Output: `comprehensive_statistical_significance.md`, `comprehensive_statistical_significance.json`, `statistical_significance_tables.md`
+
+**Key insight**: p < 0.05 indicates statistically significant differences between strategies
 
 ## Configuration
 
 ```python
-SAMPLES = 30           # Number of test claims
-MODELS = ["o3", "gpt-4o", "gpt-5-mini", "gpt-5"]
+SAMPLES = 200           # Number of test claims
+MODELS = ["o3", "gpt-5"]
 MAX_WORKERS = 20       # Parallel processes
 ```
 
@@ -89,9 +100,13 @@ MAX_WORKERS = 20       # Parallel processes
 ## Files
 - `thought_vs_naive_scifact.py` (527 lines) - Main experiment
 - `optimize_thresholds.py` (222 lines) - Threshold optimizer
-- `analyze_noinfo_performance.py` - NOINFO classification deep-dive
+- `create_rescaled_charts_with_stats.py` - Rescaled bar chart generator
+- `focused_statsig_comparisons_v2.py` - Statistical significance testing (permutation tests)
 - `data/` - SciFact dataset
 - `threshold_config.json` - Optimized thresholds per model
 - `thought_vs_naive_logs.json` - Detailed experiment logs
 - `thought_vs_naive_summary.json` - Aggregate F1 scores
-- `noinfo_analysis_results.json` - NOINFO-specific metrics
+- `noinfo_f1_o3.png`, `noinfo_f1_gpt-5.png` - Rescaled NOINFO performance charts
+- `comprehensive_statistical_significance.md` - Statistical test results
+- `comprehensive_statistical_significance.json` - Statistical test data
+- `statistical_significance_tables.md` - McNemar's test tables
