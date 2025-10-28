@@ -1,92 +1,38 @@
 {
-  "gpt-4o": {
-    "naive_classification": {
-      "threshold": 0.5,
-      "f1": 0.7350834335052413
-    },
-    "overthinking_classification": {
-      "threshold": 0.75,
-      "f1": 0.7587418814163001
-    },
-    "posthoc_classification": {
-      "threshold": 0.5,
-      "f1": 0.7387539361223573
-    },
-    "posthoc_refinement": {
-      "threshold": 0.7,
-      "f1": 0.7387539361223573
-    }
-  },
   "gpt-5": {
     "naive_classification": {
       "threshold": 0.75,
-      "f1": 0.7821444916639425
-    },
-    "overthinking_classification": {
-      "threshold": 0.5,
-      "f1": 0.7518989760156964
-    },
-    "posthoc_classification": {
-      "threshold": 0.5,
-      "f1": 0.7987725568891041
-    },
-    "posthoc_refinement": {
-      "threshold": 0.95,
-      "f1": 0.7987725568891041
-    }
-  },
-  "gpt-5-mini": {
-    "naive_classification": {
-      "threshold": 0.7,
-      "f1": 0.7483092022681036
+      "f1": 0.30824372759856633
     },
     "overthinking_classification": {
       "threshold": 0.75,
-      "f1": 0.7772532983542072
+      "f1": 0.30434782608695654
     },
     "posthoc_classification": {
       "threshold": 0.75,
-      "f1": 0.7536865038413026
+      "f1": 0.30036630036630035
     },
     "posthoc_refinement": {
       "threshold": 0.7,
-      "f1": 0.7395925637756021
+      "f1": 0.29213483146067415
     }
   },
   "o3": {
     "naive_classification": {
-      "threshold": 0.5,
-      "f1": 0.8013382252684452
+      "threshold": 0.75,
+      "f1": 0.3120567375886525
     },
     "overthinking_classification": {
-      "threshold": 0.7,
-      "f1": 0.7873088768611157
-    },
-    "posthoc_classification": {
       "threshold": 0.65,
-      "f1": 0.746536953416451
-    },
-    "posthoc_refinement": {
-      "threshold": 0.85,
-      "f1": 0.7358904205689432
-    }
-  },
-  "o4-mini": {
-    "naive_classification": {
-      "threshold": 0.5,
-      "f1": 0.7583682914454716
-    },
-    "overthinking_classification": {
-      "threshold": 0.5,
-      "f1": 0.7863301191151445
+      "f1": 0.30824372759856633
     },
     "posthoc_classification": {
-      "threshold": 0.5,
-      "f1": 0.7827095026248444
+      "threshold": 0.75,
+      "f1": 0.3120567375886525
     },
     "posthoc_refinement": {
-      "threshold": 0.85,
-      "f1": 0.7827095026248444
+      "threshold": 0.7,
+      "f1": 0.30036630036630035
     }
   }
 }

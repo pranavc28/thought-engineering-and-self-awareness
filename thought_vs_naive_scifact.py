@@ -31,30 +31,16 @@ def init_worker(debug_list):
 LABELS = {"SUPPORT", "CONTRADICT", "NOINFO"}
 SAMPLES = 200
 MAX_WORKERS = 200
-MODELS = ["o3", "o4-mini", "gpt-4o", "gpt-5-mini", "gpt-5"]
+MODELS = ["o3", "gpt-5"]
 
-# Simplified thresholds (from optimizer - using best performing approach per model)
-# Lower thresholds = less NOINFO over-prediction
 THRESHOLDS = {
-    "gpt-4o": {
-      "classification": 0.5,
-      "posthoc_refinement": 0.95
-    },
     "gpt-5": {
-      "classification": 0.7,
-      "posthoc_refinement": 0.9
-    },
-    "gpt-5-mini": {
-      "classification": 0.5,
-      "posthoc_refinement": 0.7
+        "classification": 0.75,
+        "posthoc_refinement": 0.7
     },
     "o3": {
-      "classification": 0.6,
-      "posthoc_refinement": 0.7
-    },
-    "o4-mini": {
-      "classification": 0.75,
-      "posthoc_refinement": 0.7
+        "classification": 0.75,
+        "posthoc_refinement": 0.7
     }
 }
 DEFAULT_THRESHOLDS = {"classification": 0.55, "posthoc_refinement": 0.75}
@@ -116,7 +102,7 @@ def build_naive_evidence(claim: str, model: str) -> Tuple[str, List[Dict]]:
         
         all_papers, seen_ids = [], set()
         for query in queries:
-            for p in corpus_search(query, top_k=3):
+            for p in corpus_search(query, top_k=5):
                 if p["doc_id"] not in seen_ids:
                     seen_ids.add(p["doc_id"])
                     all_papers.append(p)
@@ -142,14 +128,14 @@ def build_posthoc_evidence(claim: str, model: str) -> Tuple[str, List[Dict], Dic
         
         all_papers, seen_ids = [], set()
         for query in queries:
-            for p in corpus_search(query, top_k=3):
+            for p in corpus_search(query, top_k=5):
                 if p["doc_id"] not in seen_ids:
                     seen_ids.add(p["doc_id"])
                     all_papers.append(p)
         
         # Assess quality
         preview = "\n\n".join([f"Paper {i}: {p['title']}\n{p['abstract'][:500]}" 
-                              for i, p in enumerate(all_papers[:8], 1)])
+                              for i, p in enumerate(all_papers[:10], 1)])
         assess_prompt = (
             f"You retrieved these papers for the claim. Assess if they provide sufficient evidence.\n\n"
             f"Claim: {claim}\n\n"
@@ -196,7 +182,7 @@ def build_posthoc_evidence(claim: str, model: str) -> Tuple[str, List[Dict], Dic
             refined_queries = json.loads(resp3.choices[0].message.content or "{}").get("refined_queries", [])[:2]
             
             for query in refined_queries:
-                for p in corpus_search(query, top_k=2):
+                for p in corpus_search(query, top_k=5):
                     if p["doc_id"] not in seen_ids:
                         seen_ids.add(p["doc_id"])
                         all_papers.append(p)
@@ -236,7 +222,7 @@ def build_overthinking_evidence(claim: str, model: str) -> Tuple[str, List[Dict]
         
         all_papers, seen_ids = [], set()
         for query in queries:
-            for p in corpus_search(query, top_k=3):
+            for p in corpus_search(query, top_k=5):
                 if p["doc_id"] not in seen_ids:
                     seen_ids.add(p["doc_id"])
                     all_papers.append(p)
@@ -369,13 +355,18 @@ def load_scifact_data(samples: int) -> List[Dict]:
             with open(f"data/cross_validation/fold_{fold}/claims_dev_{fold}.jsonl", "r") as f:
                 for line in f:
                     item = json.loads(line)
-                    claims_data.append({
-                        "id": str(item["id"]),
-                        "text": item["claim"],
-                        "label_text": extract_label(item.get("evidence", {})),
-                    })
+                    label = extract_label(item.get("evidence", {}))
+                    # Only include NOINFO samples
+                    if label == "NOINFO":
+                        claims_data.append({
+                            "id": str(item["id"]),
+                            "text": item["claim"],
+                            "label_text": label,
+                        })
         except FileNotFoundError:
             continue
+    if len(claims_data) < samples:
+        raise ValueError(f"Not enough NOINFO samples found. Found {len(claims_data)}, requested {samples}")
     return random.sample(claims_data, k=min(samples, len(claims_data)))
 
 def plot_results(model_results: Dict):

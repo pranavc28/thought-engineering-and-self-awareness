@@ -1,102 +1,42 @@
 {
   "o3": {
-    "naive_f1": 0.8013382252684452,
-    "overthinking_f1": 0.7672526109639922,
-    "posthoc_f1": 0.7358904205689432,
+    "naive_f1": 0.2942271880819367,
+    "overthinking_f1": 0.307277628032345,
+    "posthoc_f1": 0.3033605812897366,
     "naive_per_class": {
-      "NOINFO": 0.7861271676300577,
-      "CONTRADICT": 0.8409090909090909,
-      "SUPPORT": 0.776978417266187
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.8826815642458101
     },
     "overthinking_per_class": {
-      "NOINFO": 0.7630057803468209,
-      "CONTRADICT": 0.7816091954022988,
-      "SUPPORT": 0.757142857142857
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.921832884097035
     },
     "posthoc_per_class": {
-      "NOINFO": 0.7325581395348838,
-      "CONTRADICT": 0.7058823529411764,
-      "SUPPORT": 0.7692307692307693
-    }
-  },
-  "o4-mini": {
-    "naive_f1": 0.7583682914454716,
-    "overthinking_f1": 0.7863301191151445,
-    "posthoc_f1": 0.7827095026248444,
-    "naive_per_class": {
-      "NOINFO": 0.7439024390243902,
-      "CONTRADICT": 0.7777777777777778,
-      "SUPPORT": 0.7534246575342466
-    },
-    "overthinking_per_class": {
-      "NOINFO": 0.7682926829268293,
-      "CONTRADICT": 0.7906976744186046,
-      "SUPPORT": 0.7999999999999999
-    },
-    "posthoc_per_class": {
-      "NOINFO": 0.7664670658682634,
-      "CONTRADICT": 0.7954545454545455,
-      "SUPPORT": 0.7862068965517242
-    }
-  },
-  "gpt-4o": {
-    "naive_f1": 0.7350834335052413,
-    "overthinking_f1": 0.7504248366013072,
-    "posthoc_f1": 0.7387539361223573,
-    "naive_per_class": {
-      "NOINFO": 0.7411764705882353,
-      "CONTRADICT": 0.7073170731707317,
-      "SUPPORT": 0.7567567567567568
-    },
-    "overthinking_per_class": {
-      "NOINFO": 0.7529411764705882,
-      "CONTRADICT": 0.7250000000000001,
-      "SUPPORT": 0.7733333333333333
-    },
-    "posthoc_per_class": {
-      "NOINFO": 0.7499999999999999,
-      "CONTRADICT": 0.6842105263157896,
-      "SUPPORT": 0.7820512820512822
-    }
-  },
-  "gpt-5-mini": {
-    "naive_f1": 0.7346933621933621,
-    "overthinking_f1": 0.7528071057482822,
-    "posthoc_f1": 0.7395925637756021,
-    "naive_per_class": {
-      "NOINFO": 0.68,
-      "CONTRADICT": 0.7708333333333333,
-      "SUPPORT": 0.7532467532467533
-    },
-    "overthinking_per_class": {
-      "NOINFO": 0.717948717948718,
-      "CONTRADICT": 0.7692307692307692,
-      "SUPPORT": 0.7712418300653595
-    },
-    "posthoc_per_class": {
-      "NOINFO": 0.6805555555555556,
-      "CONTRADICT": 0.7835051546391751,
-      "SUPPORT": 0.7547169811320754
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.9100817438692098
     }
   },
   "gpt-5": {
-    "naive_f1": 0.7789561399644657,
-    "overthinking_f1": 0.7518989760156964,
-    "posthoc_f1": 0.7987725568891041,
+    "naive_f1": 0.27906976744186046,
+    "overthinking_f1": 0.2857142857142857,
+    "posthoc_f1": 0.28895184135977336,
     "naive_per_class": {
-      "NOINFO": 0.7738095238095238,
-      "CONTRADICT": 0.7659574468085107,
-      "SUPPORT": 0.7971014492753623
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.8372093023255813
     },
     "overthinking_per_class": {
-      "NOINFO": 0.7471264367816092,
-      "CONTRADICT": 0.7640449438202247,
-      "SUPPORT": 0.7445255474452555
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.8571428571428571
     },
     "posthoc_per_class": {
-      "NOINFO": 0.7928994082840237,
-      "CONTRADICT": 0.7865168539325843,
-      "SUPPORT": 0.8169014084507042
+      "SUPPORT": 0.0,
+      "CONTRADICT": 0.0,
+      "NOINFO": 0.8668555240793201
     }
   }
 }
